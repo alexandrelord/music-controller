@@ -28,7 +28,7 @@ export default function MyApp(props) {
           </Layout>
       </ThemeProvider>
     </CacheProvider>
-  );
+  )
 }
 
 MyApp.propTypes = {

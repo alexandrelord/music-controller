@@ -1,4 +1,5 @@
 import { useState } from "react"
+import axios from "../src/utils/axios"
 
 import Link from "next/link"
 import Button from "@mui/material/Button"
@@ -24,8 +25,9 @@ function CreateRoom() {
     setGuestCanPause(e.target.value === "true" ? true: false)
   }
 
-  const handleRoomButtonClick = () => {
-    console.log('Clicked')
+  const handleRoomButtonClick = async () => {
+    const response = await axios.post('/api/create-room', {guest_can_pause: guestCanPause, votes_to_skip: votesToSkip})
+    console.log(response?.data)
   }
 
     return (

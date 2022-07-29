@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useRouter } from "next/router"
 import axios from "../src/utils/axios"
 
 import Link from "next/link"
@@ -16,6 +17,7 @@ function CreateRoom() {
   const defaultVotes = 2
   const [guestCanPause, setGuestCanPause] = useState(true)
   const [votesToSkip, setVotesToSkip] = useState(defaultVotes)
+  const router = useRouter()
 
   const handleVotesChange = (e) => {
     setVotesToSkip(e.target.value)
@@ -27,7 +29,7 @@ function CreateRoom() {
 
   const handleRoomButtonClick = async () => {
     const response = await axios.post('/api/create-room', {guest_can_pause: guestCanPause, votes_to_skip: votesToSkip})
-    console.log(response?.data)
+    router.push(`/room/${response.data.code}`)
   }
 
     return (
@@ -87,7 +89,6 @@ function CreateRoom() {
             </Button>
           </Link>
         </Grid>
-
       </Grid>
     )
   }

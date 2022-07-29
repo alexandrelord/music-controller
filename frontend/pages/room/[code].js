@@ -8,17 +8,21 @@ function Details() {
     const [guestCanPause, setGuestCanPause] = useState(false)
     const [isHost, setIsHost] = useState(false)
 
-    const getRoomDetails = async () => {
-        const response = await axios.get(`/api/get-room?code="${query.code}`)
-        console.log(response)
+    const getRoomDetail = async () => {
+        const response = await axios.get(`/api/get-room?code=${query.code}`)
+        setVotesToSkip(response?.data?.votes_to_skip)
+        setGuestCanPause(response?.data?.guest_can_pause)
+        setIsHost(response?.data?.is_host)
+        console.log(response.data)
     }
+    getRoomDetail()
 
   return (
     <>
         <h1>{query.code}</h1>
         <p>Votes: {votesToSkip}</p>
-        <p>Guest Can Pause: {guestCanPause}</p>
-        <p>Host: {isHost}</p>
+        <p>Guest Can Pause: {guestCanPause.toString()}</p>
+        <p>Host: {isHost.toString()}</p>
     </>
   )
 }

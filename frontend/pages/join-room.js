@@ -1,12 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import axios from "../src/utils/axios"
+import Link from "next/link"
 
 import TextField from "@mui/material/TextField"
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
-import Link from "next/link"
 
 
 function JoinRoom() {
@@ -14,14 +14,18 @@ function JoinRoom() {
   const [error, setError] = useState('')   
   const router = useRouter()
 
+  useEffect(() => {
+    setError('')
+  }, [roomCode])
+
   const handleRoomButtonClick = async () => {
-    // add try catch error handling
-    const response = await axios.post('/api/join-room/', {'code': roomCode})
-    if (response.status === 200) {
-      router.push(`/room/${roomCode}`)
-    } else {
-      setError("Room not Found.")
-    }
+    await axios.post('/api/join-room/', {
+      'code': roomCode
+    })
+    .then(response => {
+      if (response.status === 200) router.push(`/room/${roomCode}`)
+    })
+    .catch(() => setError('Room Not Found'))
   }
 
   return (

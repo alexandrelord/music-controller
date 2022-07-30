@@ -9,11 +9,11 @@ function Details() {
     const [isHost, setIsHost] = useState(false)
 
     const getRoomDetail = async () => {
+      // include error handling (try/catch)
         const response = await axios.get(`/api/get-room?code=${query.code}`)
         setVotesToSkip(response?.data?.votes_to_skip)
         setGuestCanPause(response?.data?.guest_can_pause)
         setIsHost(response?.data?.is_host)
-        console.log(response.data)
     }
     getRoomDetail()
 

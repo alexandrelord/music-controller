@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useRouter } from "next/router"
 import axios from "../src/utils/axios"
-
 import Link from "next/link"
+
 import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
@@ -28,8 +28,15 @@ function CreateRoom() {
   }
 
   const handleRoomButtonClick = async () => {
-    const response = await axios.post('/api/create-room/', {guest_can_pause: guestCanPause, votes_to_skip: votesToSkip})
-    router.push(`/room/${response.data.code}`)
+    await axios.post('/api/create-room/', {
+      guest_can_pause: guestCanPause, 
+      votes_to_skip: votesToSkip
+    })
+    .then(response => {
+      if (response.status === 200) router.push(`/room/${response.data.code}`)
+    })
+    .catch((error) => console.log(error))
+    
   }
 
     return (

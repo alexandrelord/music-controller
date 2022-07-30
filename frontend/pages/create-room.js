@@ -28,7 +28,7 @@ function CreateRoom() {
   }
 
   const handleRoomButtonClick = async () => {
-    const response = await axios.post('/api/create-room', {guest_can_pause: guestCanPause, votes_to_skip: votesToSkip})
+    const response = await axios.post('/api/create-room/', {guest_can_pause: guestCanPause, votes_to_skip: votesToSkip})
     router.push(`/room/${response.data.code}`)
   }
 

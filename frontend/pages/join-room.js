@@ -16,11 +16,11 @@ function JoinRoom() {
 
   const handleRoomButtonClick = async () => {
     // add try catch error handling
-    const response = await axios.post('/api/join-room/', {roomCode})
-    if (response?.ok) {
+    const response = await axios.post('/api/join-room/', {'code': roomCode})
+    if (response.status === 200) {
       router.push(`/room/${roomCode}`)
     } else {
-      setError({error: "Room not Found."})
+      setError("Room not Found.")
     }
   }
 
@@ -33,12 +33,13 @@ function JoinRoom() {
           </Grid>
           <Grid item xs={12} align="center">
             <TextField
-              error={error} // bool
+              error={error ? true : false}
               label="Code"
               placeholder="Enter a Room Code"
               value={roomCode} 
               helperText={error}
               variant="outlined"
+              autoComplete="off"
               onChange={(e) => setRoomCode(e.target.value)}
             />
           </Grid>

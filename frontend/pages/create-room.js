@@ -85,13 +85,22 @@ function CreateRoom() {
           </FormControl>
         </Grid>
         <Grid item xs={12} align="center">
-          <Button color="primary" variant="contained" onClick={handleRoomButtonClick}>
+          <Button 
+            color="primary" 
+            variant="contained"
+            disableRipple 
+            onClick={handleRoomButtonClick}
+          >
             Create A Room
           </Button>
         </Grid>
         <Grid item xs={12} align="center">
           <Link href="/" passHref>  
-            <Button color="secondary" variant="contained">
+            <Button 
+            color="secondary" 
+            variant="contained" 
+            disableRipple
+            >
               Back
             </Button>
           </Link>

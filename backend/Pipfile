@@ -9,6 +9,7 @@ djangorestframework = "*"
 python-decouple = "*"
 psycopg2-binary = "*"
 django-cors-headers = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 

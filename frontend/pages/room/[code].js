@@ -1,20 +1,19 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from '../../src/utils/axios'
-import Link from "next/link"
 
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 function Details() {
-    const { query } = useRouter()
+    const router = useRouter()
     const [votesToSkip, setVotesToSkip] = useState(2)
     const [guestCanPause, setGuestCanPause] = useState(false)
     const [isHost, setIsHost] = useState(false)
 
     const getRoomDetail = async () => {
-        await axios.get(`/api/get-room?code=${query.code}`)
+        await axios.get(`/api/get-room?code=${router.query.code}`)
         .then(response => {
           if (response.status === 200) {
             setVotesToSkip(response?.data?.votes_to_skip)
@@ -26,12 +25,22 @@ function Details() {
     }
     getRoomDetail()
 
+    const handleLeaveButtonClick = async () => {
+      await axios.post('/api/leave-room/')
+      .then(response => {
+        if (response.status === 200) {
+          router.push('/')
+        }
+      })
+      .catch(error => console.error(error))
+    }
+
   return (
     
     <Grid container spacing={1}>
       <Grid item xs={12} align="center">
         <Typography variant="h6" component="h6">
-          Code: {query.code}
+          Code: {router.query.code}
         </Typography>
       </Grid>
       <Grid item xs={12} align="center">
@@ -50,15 +59,14 @@ function Details() {
         </Typography>
       </Grid>
       <Grid item xs={12} align="center">
-        <Link href="/" passHref>
           <Button 
             variant="contained" 
             color="secondary"
             disableRipple
+            onClick={handleLeaveButtonClick}
           >
             Leave Room
           </Button>
-        </Link>
       </Grid>
     </Grid>
   )

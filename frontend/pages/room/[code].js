@@ -31,7 +31,7 @@ function Details() {
     <Grid container spacing={1}>
       <Grid item xs={12} align="center">
         <Typography variant="h6" component="h6">
-          Code: {roomCode}
+          Code: {query.code}
         </Typography>
       </Grid>
       <Grid item xs={12} align="center">
@@ -46,7 +46,7 @@ function Details() {
       </Grid>
       <Grid item xs={12} align="center">
         <Typography variant="h6" component="h6">
-          Guest Can Pause: {guestCanPause.toString()}
+          Guest Can Pause: {isHost.toString()}
         </Typography>
       </Grid>
       <Grid item xs={12} align="center">

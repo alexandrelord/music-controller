@@ -26,13 +26,17 @@ function Details() {
     getRoomDetail()
 
     const handleLeaveButtonClick = async () => {
-      await axios.post('/api/leave-room/')
-      .then(response => {
-        if (response.status === 200) {
-          router.push('/')
-        }
-      })
-      .catch(error => console.error(error))
+      if (isHost === true) {
+        await axios.post('/api/leave-room/')
+        .then(response => {
+          if (response.status === 200) {
+            router.push('/')
+          }
+        })
+        .catch(error => console.error(error))
+      } else {
+        router.push('/')
+      }
     }
 
   return (

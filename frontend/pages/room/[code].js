@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from '../../src/utils/axios'
+import Link from "next/link"
 
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -49,9 +50,15 @@ function Details() {
         </Typography>
       </Grid>
       <Grid item xs={12} align="center">
-        <Button variant="contained" color="secondary">
-          Leave Room
-        </Button>
+        <Link href="/" passHref>
+          <Button 
+            variant="contained" 
+            color="secondary"
+            disableRipple
+          >
+            Leave Room
+          </Button>
+        </Link>
       </Grid>
     </Grid>
   )

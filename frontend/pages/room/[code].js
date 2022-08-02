@@ -1,6 +1,10 @@
-import { useState } from "react"
-import { useRouter } from "next/router"
-import axios from "../../src/utils/axios"
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import axios from '../../src/utils/axios'
+
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 
 function Details() {
     const { query } = useRouter()
@@ -9,21 +13,47 @@ function Details() {
     const [isHost, setIsHost] = useState(false)
 
     const getRoomDetail = async () => {
-      // include error handling (try/catch)
-        const response = await axios.get(`/api/get-room?code=${query.code}`)
-        setVotesToSkip(response?.data?.votes_to_skip)
-        setGuestCanPause(response?.data?.guest_can_pause)
-        setIsHost(response?.data?.is_host)
+        await axios.get(`/api/get-room?code=${query.code}`)
+        .then(response => {
+          if (response.status === 200) {
+            setVotesToSkip(response?.data?.votes_to_skip)
+            setGuestCanPause(response?.data?.guest_can_pause)
+            setIsHost(response?.data?.is_host)
+          }
+        })
+        .catch(error => console.error(error))
     }
     getRoomDetail()
 
   return (
-    <>
-        <h1>{query.code}</h1>
-        <p>Votes: {votesToSkip}</p>
-        <p>Guest Can Pause: {guestCanPause.toString()}</p>
-        <p>Host: {isHost.toString()}</p>
-    </>
+    
+    <Grid container spacing={1}>
+      <Grid item xs={12} align="center">
+        <Typography variant="h6" component="h6">
+          Code: {roomCode}
+        </Typography>
+      </Grid>
+      <Grid item xs={12} align="center">
+        <Typography variant="h6" component="h6">
+          Votes: {votesToSkip}
+        </Typography>
+      </Grid>
+      <Grid item xs={12} align="center">
+        <Typography variant="h6" component="h6">
+          Guest Can Pause: {guestCanPause.toString()}
+        </Typography>
+      </Grid>
+      <Grid item xs={12} align="center">
+        <Typography variant="h6" component="h6">
+          Guest Can Pause: {guestCanPause.toString()}
+        </Typography>
+      </Grid>
+      <Grid item xs={12} align="center">
+        <Button variant="contained" color="secondary">
+          Leave Room
+        </Button>
+      </Grid>
+    </Grid>
   )
 }
 

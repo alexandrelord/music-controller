@@ -33,11 +33,9 @@ function CreateRoom() {
       votes_to_skip: votesToSkip
     })
     .then(response => {
-      console.log(response)
       if (response.status === 201) router.push(`/room/${response.data.code}`)
     })
-    .catch((error) => console.log(error))
-    
+    .catch(error => console.error(error))
   }
 
     return (

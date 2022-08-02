@@ -59,7 +59,7 @@ function Details() {
       </Grid>
       <Grid item xs={12} align="center">
         <Typography variant="h6" component="h6">
-          Guest Can Pause: {isHost.toString()}
+          Host: {isHost.toString()}
         </Typography>
       </Grid>
       <Grid item xs={12} align="center">

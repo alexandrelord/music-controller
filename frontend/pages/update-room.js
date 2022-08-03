@@ -1,3 +1,5 @@
+import CreateAndUpdateForm from '../components/CreateAndUpdateForm'
+
 const UpdateRoom = (props) => {
     return ( 
         <CreateAndUpdateForm 

@@ -1,8 +1,11 @@
-const UpdateRoom = () => {
+const UpdateRoom = (props) => {
     return ( 
-        <h1>
-            updateRoom
-        </h1>
+        <CreateAndUpdateForm 
+            defaultVotes={props.defaultVotes}
+            handleGuestCanPauseChange={props.handleGuestCanPauseChange}
+            handleVotesChange={props.handleVotesChange}
+            handleRoomButtonClick={props.handleRoomButtonClick}
+        />
      )
 }
  

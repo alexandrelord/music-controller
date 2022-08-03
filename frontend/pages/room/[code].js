@@ -41,12 +41,9 @@ function Details() {
     }
   }
 
-  const handleSettingsButtonClick = () => {
-    router.push('/update-room')
-  }
-
   const renderSettingsButton = () => {
     const state = {
+      update: true,
       guestCanPause,
       votesToSkip,
       roomCode,

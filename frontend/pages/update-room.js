@@ -1,12 +1,13 @@
 import CreateAndUpdateForm from '../components/CreateAndUpdateForm'
 import { useRouter } from 'next/router'
+import { Room } from '@mui/icons-material'
 
 const UpdateRoom = () => {
     const router = useRouter()
-    console.log(router.query)
+    const roomInfo = router.query
 
     return (
-            <CreateAndUpdateForm />
+        <CreateAndUpdateForm updateRoom={roomInfo} />
      )
 }
  

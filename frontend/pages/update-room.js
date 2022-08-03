@@ -1,13 +1,12 @@
 import CreateAndUpdateForm from '../components/CreateAndUpdateForm'
+import { useRouter } from 'next/router'
 
-const UpdateRoom = (props) => {
-    return ( 
-        <CreateAndUpdateForm 
-            defaultVotes={props.defaultVotes}
-            handleGuestCanPauseChange={props.handleGuestCanPauseChange}
-            handleVotesChange={props.handleVotesChange}
-            handleRoomButtonClick={props.handleRoomButtonClick}
-        />
+const UpdateRoom = () => {
+    const router = useRouter()
+    console.log(router.query)
+
+    return (
+            <CreateAndUpdateForm />
      )
 }
  

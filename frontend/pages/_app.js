@@ -9,7 +9,6 @@ import createEmotionCache from '../src/createEmotionCache'
 import Layout from '../components/Layout'
 import '../styles/globals.css'
 
-
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
 

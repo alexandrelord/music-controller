@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import axios from '../../src/utils/axios'
 
 import Grid from '@mui/material/Grid'
@@ -41,22 +42,33 @@ function Details() {
   }
 
   const handleSettingsButtonClick = () => {
-          router.push({ 
-            pathname: '/update-room', 
-            state: { 
-              update: true, 
-              votesToSkip,
-              guestCanPause,
-              roomCode
-            }})
+    router.push('/update-room')
   }
 
   const renderSettingsButton = () => {
+    const state = {
+      guestCanPause,
+      votesToSkip,
+      roomCode,
+    }
+    
     return (
       <Grid item xs={12} align="center">
-        <Button variant="contained" color="primary" onClick={handleSettingsButtonClick}>
-          Settings
-        </Button>
+        <Link 
+          href={{
+            pathname: "/update-room",
+            query: state,
+          }} 
+          passHref
+        >
+          <Button 
+            variant="contained" 
+            color="primary" 
+            disableRipple
+          >
+            Settings
+          </Button>
+        </Link>
       </Grid>
     )
   }

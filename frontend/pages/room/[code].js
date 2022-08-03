@@ -27,7 +27,7 @@ function Details() {
 
     const handleLeaveButtonClick = async () => {
       if (isHost === true) {
-        await axios.post('/api/leave-room/')
+        await axios.delete('/api/leave-room/')
         .then(response => {
           if (response.status === 200) {
             router.push('/')

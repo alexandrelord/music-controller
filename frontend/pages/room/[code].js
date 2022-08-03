@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from '../../src/utils/axios'
-import CreateAndUpdateForm from '../../components/CreateAndUpdateForm'
 
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -41,23 +40,21 @@ function Details() {
     }
   }
 
-  const renderSettings = () => {
-    <Grid container spacing={1}>
-      <Grid item xs={12} align="center">
-        <CreateAndUpdateForm 
-          update={true}
-          votesToSkip={votesToSkip}
-          guestCanPause={guestCanPause}
-          roomCode={roomCode}
-        />
-      </Grid>
-    </Grid>
+  const handleSettingsButtonClick = () => {
+          router.push({ 
+            pathname: '/update-room', 
+            state: { 
+              update: true, 
+              votesToSkip,
+              guestCanPause,
+              roomCode
+            }})
   }
 
   const renderSettingsButton = () => {
     return (
       <Grid item xs={12} align="center">
-        <Button variant="contained" color="primary" onClick={() => router.push('/update-room')}>
+        <Button variant="contained" color="primary" onClick={handleSettingsButtonClick}>
           Settings
         </Button>
       </Grid>

@@ -29,13 +29,14 @@ function Details() {
 
   const handleLeaveButtonClick = async () => {
     if (isHost === true) {
-      await axios.delete('/api/leave-room/')
-      .then(response => {
+      try {
+        await axios.delete('/api/leave-room/')
         if (response.status === 200) {
           router.push('/')
         }
-      })
-      .catch(error => console.error(error))
+      } catch (error) {
+        console.error(error)
+      }
     } else {
       router.push('/')
     }

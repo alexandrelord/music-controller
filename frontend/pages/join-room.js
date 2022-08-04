@@ -19,13 +19,15 @@ function JoinRoom() {
   }, [roomCode])
 
   const handleRoomButtonClick = async () => {
-    await axios.post('/api/join-room/', {
-      'code': roomCode
-    })
-    .then(response => {
+    try {
+      const response = await axios.post('/api/join-room/', {
+        'code': roomCode
+      })
       if (response.status === 200) router.push(`/room/${roomCode}`)
-    })
-    .catch(() => setError('Room Not Found'))
+      else setError('Room Not Found')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

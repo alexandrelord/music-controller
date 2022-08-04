@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import axios from "../src/utils/axios"
@@ -14,17 +14,17 @@ import RadioGroup from "@mui/material/RadioGroup"
 import FormControlLabel from "@mui/material/FormControlLabel"
 
 const CreateAndUpdateForm = (props) => {
-  const defaultVotes = 2
+  let defaultVotes = 2
   const [guestCanPause, setGuestCanPause] = useState(true)
   const [votesToSkip, setVotesToSkip] = useState(defaultVotes)
   const router = useRouter()
-
-  const update = ''
-  props.updateRoom ? update = true : null
-  if(update) {
-    console.log(updateRoom)
+  
+  let update = ''
+  if (props.updateRoom) {
+    update = true
+    defaultVotes = props.updateRoom.votesToSkip
+    // update state of votes to skip
   }
-
 
   const handleVotesChange = (e) => {
     setVotesToSkip(e.target.value)
@@ -35,6 +35,7 @@ const CreateAndUpdateForm = (props) => {
   }
 
   const handleRoomButtonClick = async () => {
+    //if update true - send to update end point
     await axios.post('/api/create-room/', {
       guest_can_pause: guestCanPause, 
       votes_to_skip: votesToSkip
@@ -97,7 +98,7 @@ const CreateAndUpdateForm = (props) => {
         disableRipple 
         onClick={handleRoomButtonClick}
       >
-        Create A Room
+        {update ? 'Update Room' : 'Create a Room'}
       </Button>
     </Grid>
     <Grid item xs={12} align="center">
